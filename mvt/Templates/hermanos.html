@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <title>Abuela</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/x-icon" href="{% static 'AppFamilia/assets/img/favicon.ico' %}" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">   
+    <link rel="stylesheet" href="{% static 'AppFamilia/css/hermanos.css' %}"/>
+</head>
+<body>
+    <header id="titulo">
+        <h1>Informacion Hermana</h1>
+    </header>
+    <section class="container">
+        <article class="post">
+            <h2>Hermana</h2>
+            <p>Datos - Hermana</p>
+            <img src="{% static 'AppFamilia/assets/img/hermana.jpg' %}" width="400"/>
+            <p id="info" class="scale-up-center">Nombre: {{nombre}} <br> Apellido: {{apellido}} <br> Edad: {{edad}} años <br> Fecha de Nacimiento: {{fn}} <br> Ocupacion: {{ocupacion}}</p>
+        </article>
+        
+        </article>
+    </section>
+    <footer>
+        <section>
+            <a href="#titulo">Ir al inicio -</a>
+            <a href="http://127.0.0.1:8000/AppFamilia/">Volver a la pagina principal -</a>
+            <a href="mailto:mortedixs@gmail.com">Contactame Aquí</a>
+        </section>
+        <p>Copyright 2021</p>
+    </footer>
+</body>
+</html>

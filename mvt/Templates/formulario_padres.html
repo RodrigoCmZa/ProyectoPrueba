@@ -1,0 +1,33 @@
+{% extends "_base.html" %}
+
+
+{% block title %} 
+
+    Ingresar nuevos Padres
+
+{% endblock %}
+
+
+
+
+
+
+{% block body %}
+
+<form action="/AppFamilia/padres/crear" method="POST"> {% csrf_token %}
+    <label for="id_number">
+      Nombre:
+      
+    </label>
+    <input id="id_number"
+           name="number"
+           type="text"
+           placeholder="">
+    <button type="submit">
+      Click
+    </button>
+  </p>
+  </form>
+
+
+{% endblock %}
