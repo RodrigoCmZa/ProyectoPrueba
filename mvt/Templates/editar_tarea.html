@@ -1,0 +1,28 @@
+{% extends "_base.html" %}
+
+
+{% block title %} 
+
+    {{titulo}}
+
+{% endblock %}
+
+
+
+
+
+
+{% block body %}
+
+<form action="" method="POST"> {% csrf_token %}
+    <p>
+    <label for="id_tarea"> Nombre de la tarea: </label>
+    <input id="id_tarea" name="nombre_tarea" type="text" value="{{tarea.nombre}}"></p>
+    <p><label for="id_responsable"> Nombre del responsable: </label>
+    <input id="responsable" name="responsable" type="text" value="{{tarea.responsables}}"></p>
+    <input type="submit" value="Enviar">
+  
+</form>
+
+
+{% endblock %}

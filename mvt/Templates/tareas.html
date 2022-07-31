@@ -1,7 +1,7 @@
-
+{% extends '_base.html' %}
 {% block title %} 
 
-    Mostrar tareas
+    {{titulo}}
 
 {% endblock %}
 
@@ -10,7 +10,34 @@
 
 {% block body %}
 
-    Aca estaria mostrando las tareas
+<div class="">
+    <h2>Lista de Tareas</h2>
+    <div class="">
+        <table class="">
+            <thead class="">
+                <tr class="">
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Responsable</th>
+                    <th>Fecha de creacion</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for tarea in tareas %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tarea.nombre}}</td>
+                    <td>{{tarea.responsable}}</td>
+                    <td>{{tarea.dia_de_creacion}}</td>
+                    <td><a href="{%  url 'editar_tareas' tarea.id %}" class="">Editar</a></td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
 
 {% endblock %}

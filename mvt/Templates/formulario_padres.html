@@ -3,7 +3,7 @@
 
 {% block title %} 
 
-    Ingresar nuevos Padres
+    <title>Ingresar nuevos Padres</title>
 
 {% endblock %}
 
@@ -15,19 +15,13 @@
 {% block body %}
 
 <form action="/AppFamilia/padres/crear" method="POST"> {% csrf_token %}
-    <label for="id_number">
-      Nombre:
-      
-    </label>
-    <input id="id_number"
-           name="number"
-           type="text"
-           placeholder="">
-    <button type="submit">
-      Click
-    </button>
-  </p>
-  </form>
+    <p>Nombre: <input type="text"> </p>
+    <p>Apellido: <input type="text"></p>
+    <input type="submit" value="Enviar">
+    
+    
+  
+</form>
 
 
 {% endblock %}
