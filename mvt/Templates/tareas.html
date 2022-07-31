@@ -20,6 +20,7 @@
                     <th>Nombre</th>
                     <th>Responsable</th>
                     <th>Fecha de creacion</th>
+                    <th colspan="2"> opciones</th>
                     
                 </tr>
             </thead>
@@ -31,7 +32,7 @@
                     <td>{{tarea.responsable}}</td>
                     <td>{{tarea.dia_de_creacion}}</td>
                     <td><a href="{%  url 'editar_tareas' tarea.id %}" class="">Editar</a></td>
-                    
+                    <td><a href="{%  url 'eliminar_tarea' tarea.id %}" class="">Eliminar</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

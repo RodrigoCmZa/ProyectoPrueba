@@ -99,18 +99,14 @@ def Abuelos(request):
 # Vistas basadas en Clases
 
 
-  
-
 def mostrar_tarea(request):
     tareas = Tareas.objects.all()
     ctx = {
         "titulo": "Lista de tareas",
         "tareas": tareas,
-        
     }
-    
-    return render(request, "tareas.html", context=ctx)   
 
+    return render(request, "tareas.html", context=ctx)
 
 
 def crear_tareas(request):
@@ -118,7 +114,9 @@ def crear_tareas(request):
     if request.method == "POST":
         nombre = request.POST["nombre_tarea"]
         responsable = request.POST["responsable"]
-        tarea = Tareas.objects.create(nombre=nombre, responsables=responsable)  # noqa
+        tarea = Tareas.objects.create(
+            nombre=nombre, responsables=responsable
+        )  # noqa
         tarea.save()
 
         messages.success(request, "Tarea: " + nombre + " ¡Guardada con exito!")
@@ -129,17 +127,25 @@ def crear_tareas(request):
 @require_http_methods(["POST", "GET"])
 def editar_tareas(request, id):
     tarea = Tareas.objects.get(id=id)
-    
-    ctx= {"tarea": tarea, 'titulo': "Formulario para editar tareas"}
-    if request.method == 'POST':
-        nombre = request.POST['nombre_tarea']
+
+    ctx = {"tarea": tarea, "titulo": "Formulario para editar tareas"}
+    if request.method == "POST":
+        nombre = request.POST["nombre_tarea"]
         print("Hola mundo")
-        responsable = request.POST['responsable']
-        tarea.nombre=nombre
-        tarea.responsables=responsable
+        responsable = request.POST["responsable"]
+        tarea.nombre = nombre
+        tarea.responsables = responsable
         tarea.save()
-        messages.success(request, 'Tarea:' + nombre +' ¡Tarea editada con éxito!')
+        messages.success(
+            request, "Tarea:" + nombre + " ¡Tarea editada con éxito!"
+        )
         return redirect("/AppFamilia/tarea")
-        
 
     return render(request, "editar_tarea.html", context=ctx)
+
+
+def eliminar_tarea(request, id):
+    tarea = Tareas.objects.get(id=id)
+    tarea.delete()
+    messages.success(request, "¡Tarea eliminada!")
+    return redirect("/AppFamilia/tarea")

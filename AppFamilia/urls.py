@@ -7,6 +7,7 @@ from AppFamilia.views import (
     Abuelos,
     crear_tareas,
     editar_tareas,
+    eliminar_tarea,
     mostrar_tarea,
     crear_padres,
 )
@@ -22,4 +23,5 @@ urlpatterns = [
     path("tarea/", mostrar_tarea, name='mostrar_tareas'),
     path("tarea/crear", crear_tareas, name='crear_tareas'),
     path("tarea/editar/<id>", editar_tareas, name='editar_tareas'),
+    path("tarea/eliminar/<id>", eliminar_tarea, name='eliminar_tarea'),
 ]
