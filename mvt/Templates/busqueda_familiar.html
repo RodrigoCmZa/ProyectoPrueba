@@ -1,0 +1,24 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %} 
+
+   Busqueda de Personas
+
+{% endblock %}
+
+
+
+
+
+
+{% block body %}
+
+<form action="{% url 'buscar_persona' %}" method="GET"> {% csrf_token %}
+   
+    <input type="" name="buscar">
+      
+</form>
+
+
+{% endblock %}

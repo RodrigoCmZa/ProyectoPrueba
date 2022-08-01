@@ -1,9 +1,10 @@
 {% extends '_base.html' %}
 {% load static %}
 
+
 {% block title %} 
 
-    {{titulo}}
+    {{Familia}}
 
 {% endblock %}
 
@@ -11,20 +12,32 @@
 
 
 {% block body %}
-
+<link rel="stylesheet" href="{% static 'AppFamilia/css/familia.css' %}"/>
 <div class="">
-    <h2>Lista de Personas</h2>
+    <h2>Lista de Familiares</h2>
+    <div>
+        <form action="{% url 'buscar_persona' %}" class="" method="GET">
+            <div>
+                <input type="text" class="" placeholder="Buscar Persona..." name="buscar" value="{{request.GET.buscar}}">
+                <div>
+                    <button class="" type="submit">
+                      <i class=''>Buscar</i>      
+                    </button>
+                 </div>
+            </div>
+        </form>
+    </div>
     <div class="">
         <table class="">
             <thead class="">
-                <tr class="">
+                <tr class="lista-personas">
                     <th>#</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Edad</th>
                     <th>Fecha de Nacimiento</th>
                     <th>Ocupacion</th>
-                    <th colspan="2"> opciones</th>
+                    <th colspan="2"> Opciones</th>
                     
                 </tr>
             </thead>
@@ -38,8 +51,7 @@
                     <td>{{persona.fechaNacimiento}}</td>
                     <td>{{persona.ocupacion}}</td>
                     <td><a href="{%  url 'editar_persona' persona.id %}" class="">Editar</a></td>
-                    <td><a href="{%  url 'eliminar_persona' persona.id %}" class="">Eliminar</a></td>
-                    
+                    <td><a href="{%  url 'eliminar_persona' persona.id %}" class="">Eliminar</a></td> 
                 </tr>
                 {% endfor %}
             </tbody>

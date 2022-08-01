@@ -1,5 +1,5 @@
 {% extends "_base.html" %}
-
+{% load static %}
 
 {% block title %} 
 
@@ -14,10 +14,10 @@
 
 {% block body %}
 
-<form action="/AppFamilia/crear/padres" method="POST"> {% csrf_token %}
+<form action="/AppFamilia/crear/persona" method="POST"> {% csrf_token %}
     <p>
     <label for="id_tarea"> Nombres: </label>
-    <input id="id_tarea" name="nombre_familia" type="text" placeholder="Ingresar nombre del padre..."></p>
+    <input id="id_tarea" name="nombre_familia" type="text" placeholder="Ingresar nombre..."></p>
     <p><label for="id_responsable"> Apellido: </label>
     <input id="responsable" name="apellido_familia" type="text" placeholder="Ingresar apellido ..."></p>
     <p><label for="id_responsable"> Edad: </label>

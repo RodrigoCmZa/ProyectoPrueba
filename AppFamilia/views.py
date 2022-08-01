@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.template import loader
 from AppFamilia.models import Familia, Tareas
 from django.views.decorators.http import require_GET, require_http_methods
+from django.db.models import Q
 
 
 # Create your views here.
@@ -20,7 +21,7 @@ def Inicio(request):
 
 
 @require_http_methods(["POST", "GET"])
-def crear_padres(request):
+def crear_persona(request):
     ctx = {"titulo": "Formulario de Familia"}
     if request.method == "POST":
         nombre = request.POST["nombre_familia"]
@@ -135,3 +136,24 @@ def eliminar_tarea(request, id):
     return redirect("/AppFamilia/tarea")
 
 
+def busqueda_familiar (request):
+    return render(request, 'busqueda_familiar.html')
+
+
+def buscar_persona(request):
+    busqueda = request.GET.get("buscar")
+    familiares = Familia.objects.all()  
+
+    if busqueda:
+        familiares = Familia.objects.filter(
+            Q(nombre__icontains = busqueda) |
+            Q(apellido__icontains = busqueda) |
+            Q(edad__icontains = busqueda)|
+            Q(fechaNacimiento__icontains = busqueda) |
+            Q(ocupacion__icontains = busqueda)
+        ).distinct()
+
+        return render(request, 'resultado_busqueda.html', {'familiares':familiares})
+    else:
+        familiares = False
+        return render(request, 'resultado_busqueda.html', {'familiares':familiares})
