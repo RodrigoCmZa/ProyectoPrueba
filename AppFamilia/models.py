@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 # Create your models here.
@@ -11,8 +12,6 @@ class Familia(models.Model):
     def __str__(self):
         return f'{self.nombre} {self.apellido}'
 
-    
-
 class Tareas(models.Model):
     nombre = models.CharField(max_length=30) 
     responsables = models.CharField(max_length=30)
@@ -24,7 +23,6 @@ class Tareas(models.Model):
 
     def __str__(self):
         return f'{self.nombre}' 
-
 
 
 class Herramientas(models.Model):

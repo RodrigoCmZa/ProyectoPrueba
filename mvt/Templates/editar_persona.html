@@ -1,0 +1,34 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %} 
+
+    {{titulo}}
+
+{% endblock %}
+
+
+
+
+
+
+{% block body %}
+
+<form action="" method="POST"> {% csrf_token %}
+    <p>
+    <label for="id_persona"> Nombre: </label>
+    <input id="id_persona" name="nombre_familia" type="text" value="{{persona.nombre}}"></p>
+    <p><label for="id_persona"> Apellido: </label>
+    <input id="persona" name="apellido_familia" type="text" value="{{persona.apellido}}"></p>
+    <p><label for="id_persona"> Edad: </label>
+    <input id="persona" name="edad" type="number" value="{{persona.edad}}"></p>
+    <p><label for="id_persona"> Fecha de Nacimiento: </label>
+    <input id="persona" name="fechaNacimiento" type="date" value="{{persona.fechaNacimiento}}"></p>
+    <p><label for="id_persona"> Ocupacion: </label>
+    <input id="persona" name="ocupacion" type="text" value="{{persona.ocupacion}}"></p>
+    <input type="submit" value="Enviar">
+  
+</form>
+
+
+{% endblock %}

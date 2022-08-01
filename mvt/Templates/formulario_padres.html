@@ -3,7 +3,7 @@
 
 {% block title %} 
 
-    <title>Ingresar nuevos Padres</title>
+    {{titulo}}
 
 {% endblock %}
 
@@ -14,13 +14,19 @@
 
 {% block body %}
 
-<form action="/AppFamilia/padres/crear" method="POST"> {% csrf_token %}
-    <p>Nombre: <input type="text"> </p>
-    <p>Apellido: <input type="text"></p>
+<form action="/AppFamilia/crear/padres" method="POST"> {% csrf_token %}
+    <p>
+    <label for="id_tarea"> Nombres: </label>
+    <input id="id_tarea" name="nombre_familia" type="text" placeholder="Ingresar nombre del padre..."></p>
+    <p><label for="id_responsable"> Apellido: </label>
+    <input id="responsable" name="apellido_familia" type="text" placeholder="Ingresar apellido ..."></p>
+    <p><label for="id_responsable"> Edad: </label>
+    <input id="responsable" name="edad" type="number" placeholder="Ingresar Edad..."></p>
+    <p><label for="id_responsable"> Fecha De Nacimiento: </label>
+    <input id="responsable" name="fechaNacimiento" type="date" placeholder="Ingresar Fecha De Nacimiento..."></p>
+    <p><label for="id_responsable"> Ocupacion: </label>
+    <input id="responsable" name="ocupacion" type="text" placeholder="Ingresar Ocupacion..."></p>
     <input type="submit" value="Enviar">
-    
-    
-  
 </form>
 
 

@@ -5,6 +5,7 @@ from django.template import loader
 from AppFamilia.models import Familia, Tareas
 from django.views.decorators.http import require_GET, require_http_methods
 
+
 # Create your views here.
 # Codigo de Vitor Lira , PrimerMVT - Coder.
 
@@ -15,98 +16,67 @@ def Inicio(request):
     return HttpResponse(documento)
 
 
-@require_GET
-def Padres(request):
-    ctx = {
-        "nombre": "Sara",
-        "apellido": "Goldstein",
-        "edad": 36,
-        "fechaNacimiento": "1986-07-27",
-        "ocupacion": "Enfermera",
-    }
-    return render(request, "padres.html", context=ctx)
+
 
 
 @require_http_methods(["POST", "GET"])
 def crear_padres(request):
+    ctx = {"titulo": "Formulario de Familia"}
     if request.method == "POST":
-        madre = Familia(
-            nombre="Sara",
-            apellido="Goldstein",
-            edad=36,
-            fechaNacimiento="1986-07-27",
-            ocupacion="Enfermera",
+        nombre = request.POST["nombre_familia"]
+        apellido = request.POST["apellido_familia"]
+        edad = request.POST["edad"]
+        fechaNacimiento = request.POST["fechaNacimiento"]
+        ocupacion = request.POST["ocupacion"]
+        persona = Familia.objects.create(
+            nombre = nombre, apellido=apellido,edad=edad,fechaNacimiento=fechaNacimiento,ocupacion=ocupacion
         )
-        plantilla = loader.get_template("padres.html")
-        documentoTexto = {
-            "nombre": madre.nombre,
-            "apellido": madre.apellido,
-            "edad": madre.edad,
-            "fn": madre.fechaNacimiento,
-            "ocupacion": madre.ocupacion,
-        }
-        documento = plantilla.render(documentoTexto)
-        return HttpResponse(documento)
-    return render(request, "formulario_padres.html")
+        persona.save()
 
-
-@require_http_methods(["POST", "GET"])
-def Hermanos(request):
-    if request.method == "POST":
-        hermana = Familia(
-            nombre="Martina",
-            apellido="Goldstein",
-            edad=7,
-            fechaNacimiento="2015-01-25",
-            ocupacion="Estudiante",
-        )
-        plantilla = loader.get_template("hermanos.html")
-        documentoTexto = {
-            "nombre": hermana.nombre,
-            "apellido": hermana.apellido,
-            "edad": hermana.edad,
-            "fn": hermana.fechaNacimiento,
-            "ocupacion": hermana.ocupacion,
-        }
-        documento = plantilla.render(documentoTexto)
-        return HttpResponse(documento)
-    return render(request, "hermanos.html")
-
-
-@require_http_methods(["POST", "GET"])
-def Abuelos(request):
-    if request.method == "POST":
-        abuela = Familia(
-            nombre="Maria",
-            apellido="Goldstein",
-            edad=59,
-            fechaNacimiento="1963-02-04",
-            ocupacion="Jubilada",
-        )
-        plantilla = loader.get_template("abuelos.html")
-        documentoTexto = {
-            "nombre": abuela.nombre,
-            "apellido": abuela.apellido,
-            "edad": abuela.edad,
-            "fn": abuela.fechaNacimiento,
-            "ocupacion": abuela.ocupacion,
-        }
-        documento = plantilla.render(documentoTexto)
-        return HttpResponse(documento)
-
-
-# Vista basadas en funciones
-# Vistas basadas en Clases
-
-
-def mostrar_tarea(request):
-    tareas = Tareas.objects.all()
+        messages.success(request, "Familia: " + nombre + " ¡Guardada con exito!")
+        return redirect("/AppFamilia/familia/")
+    return render(request, "formulario_padres.html", context=ctx)    
+    
+def mostrar_familia(request):
+    personas = Familia.objects.all()
     ctx = {
-        "titulo": "Lista de tareas",
-        "tareas": tareas,
+        "titulo": "Lista de Personas",
+        "personas": personas,
     }
 
-    return render(request, "tareas.html", context=ctx)
+    return render(request, "familia.html", context=ctx) 
+
+@require_http_methods(["POST", "GET"])
+def editar_persona(request, id):
+    persona = Familia.objects.get(id=id)
+
+    ctx = {"persona": persona, "titulo": "Formulario para editar persona"}
+    if request.method == "POST":
+        nombre = request.POST["nombre_familia"]
+        apellido = request.POST["apellido_familia"]
+        edad = request.POST["edad"]
+        fechaNacimiento = request.POST["fechaNacimiento"]
+        ocupacion = request.POST["ocupacion"]
+        persona.nombre = nombre
+        persona.apellido = apellido
+        persona.edad = edad
+        persona.fechaNacimiento = fechaNacimiento
+        persona.ocupacion = ocupacion
+        persona.save()
+        messages.success(
+            request, "Persona:" + nombre + " ¡Persona editada con éxito!"
+        )
+        return redirect("/AppFamilia/familia")
+
+    return render(request, "editar_persona.html", context=ctx)
+
+
+def eliminar_persona(request, id):
+    
+    persona = Familia.objects.get(id=id)
+    persona.delete()
+    messages.success(request, "¡Persona eliminada!")
+    return redirect("/AppFamilia/familia")
 
 
 def crear_tareas(request):
@@ -123,6 +93,21 @@ def crear_tareas(request):
         return redirect("/AppFamilia/tarea/")
     return render(request, "formulario_de_tarea.html", context=ctx)
 
+# Vista basadas en funciones
+# Vistas basadas en Clases
+
+
+def mostrar_tarea(request):
+    tareas = Tareas.objects.all()
+    ctx = {
+        "titulo": "Lista de tareas",
+        "tareas": tareas,
+    }
+
+    return render(request, "tareas.html", context=ctx)
+
+
+
 
 @require_http_methods(["POST", "GET"])
 def editar_tareas(request, id):
@@ -131,7 +116,6 @@ def editar_tareas(request, id):
     ctx = {"tarea": tarea, "titulo": "Formulario para editar tareas"}
     if request.method == "POST":
         nombre = request.POST["nombre_tarea"]
-        print("Hola mundo")
         responsable = request.POST["responsable"]
         tarea.nombre = nombre
         tarea.responsables = responsable
@@ -149,3 +133,5 @@ def eliminar_tarea(request, id):
     tarea.delete()
     messages.success(request, "¡Tarea eliminada!")
     return redirect("/AppFamilia/tarea")
+
+

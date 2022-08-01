@@ -1,0 +1,51 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %} 
+
+    {{titulo}}
+
+{% endblock %}
+
+
+
+
+{% block body %}
+
+<div class="">
+    <h2>Lista de Personas</h2>
+    <div class="">
+        <table class="">
+            <thead class="">
+                <tr class="">
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Edad</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Ocupacion</th>
+                    <th colspan="2"> opciones</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for persona in personas %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{persona.nombre}}</td>
+                    <td>{{persona.apellido}}</td>
+                    <td>{{persona.edad}}</td>
+                    <td>{{persona.fechaNacimiento}}</td>
+                    <td>{{persona.ocupacion}}</td>
+                    <td><a href="{%  url 'editar_persona' persona.id %}" class="">Editar</a></td>
+                    <td><a href="{%  url 'eliminar_persona' persona.id %}" class="">Eliminar</a></td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}
