@@ -1,0 +1,30 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %} 
+
+    {{titulo}}
+
+{% endblock %}
+
+
+
+
+
+
+{% block body %}
+
+<form action="/AppFamilia/crear/herramienta" method="POST"> {% csrf_token %}
+    <p>
+    <label for="id_tarea"> Nombre de la herramienta: </label>
+    <input id="id_tarea" name="nombre_herramienta" type="text" placeholder="Ingresar nombre de la herramienta..."></p>
+    <p><label for="id_responsable"> Tipo de Tarea: </label>
+    <input id="responsable" name="tipo_de_tarea" type="text" placeholder="Ingresar tipo de tarea..."></p>
+    <p><label for="id_responsable"> Disponibilidad: </label>
+    <input id="responsable" name="disponible" type="checkbox"></p>
+    <input type="submit" value="Enviar">
+  
+</form>
+
+
+{% endblock %}

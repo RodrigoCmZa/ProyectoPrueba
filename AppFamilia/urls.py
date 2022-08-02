@@ -12,6 +12,7 @@ from AppFamilia.views import (
     mostrar_familia,
     editar_persona,
     eliminar_persona,
+    crear_herramienta,
 )
 
 # Codigo de Vitor Lira , PrimerMVT - Coder.
@@ -28,4 +29,5 @@ urlpatterns = [
     path("persona/eliminar/<id>", eliminar_persona, name='eliminar_persona'),
     path("buscar_familiar/", busqueda_familiar, name='busqueda_familiar'),
     path("buscar/", buscar_persona, name='buscar_persona'),
+    path("crear/herramienta",crear_herramienta ,name='crear_herramienta')
 ]

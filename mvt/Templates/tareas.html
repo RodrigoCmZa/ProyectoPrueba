@@ -31,10 +31,10 @@
                 <tr>
                     <td>{{forloop.counter}}</td>
                     <td>{{tarea.nombre}}</td>
-                    <td>{{tarea.responsable}}</td>
+                    <td>{{tarea.responsables}}</td>
                     <td>{{tarea.dia_de_creacion}}</td>
-                    <td><a href="{%  url 'editar_tareas' tarea.id %}" class="">Editar</a></td>
-                    <td><a href="{%  url 'eliminar_tarea' tarea.id %}" class="">Eliminar</a></td>
+                    <td><a href="{%  url 'editar_tareas' tarea.id %}"  class="btn btn-danger">Editar</a></td>
+                    <td><a href="{%  url 'eliminar_tarea' tarea.id %}" class="btn btn-danger">Eliminar</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

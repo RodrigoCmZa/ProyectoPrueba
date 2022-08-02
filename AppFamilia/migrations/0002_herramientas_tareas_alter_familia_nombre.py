@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 ('nombre', models.CharField(max_length=30)),
                 ('tipo_de_tarea', models.CharField(max_length=30)),
                 ('responsable_de_uso', models.CharField(max_length=30)),
-                ('is_used', models.BooleanField()),
+                
             ],
         ),
         migrations.CreateModel(
@@ -29,9 +29,5 @@ class Migration(migrations.Migration):
                 ('dia_de_creacion', models.DateTimeField()),
             ],
         ),
-        migrations.AlterField(
-            model_name='familia',
-            name='nombre',
-            field=models.CharField(max_length=30),
-        ),
+       
     ]
